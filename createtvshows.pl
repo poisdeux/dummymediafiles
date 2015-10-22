@@ -47,7 +47,5 @@ while(<>) {
 		open(FW,">${file}");
 		print FW "";
 		close FW;
-	} else {
-		print "ERROR: $_\n";
-	}
+	} 
 }
