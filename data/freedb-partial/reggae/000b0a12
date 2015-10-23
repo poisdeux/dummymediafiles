@@ -1,0 +1,71 @@
+# xmcd CD database file
+# Copyright (C) 1995-1998 Ti Kan
+#
+# Track frame offsets:
+#	150
+#	12988
+#	25220
+#	36304
+#	48737
+#	60633
+#	72634
+#	84232
+#	96670
+#	107954
+#	120949
+#	130752
+#	142820
+#	153334
+#	164488
+#	176900
+#	187927
+#	198590
+#
+# Disc length: 2828 seconds
+#
+# Revision: 1
+# Processed by: cddbd v1.4PL0 Copyright (c) Steve Scherf et al.
+# Submitted via: CDex 1.30Release
+#
+DISCID=000b0a12
+DTITLE=U-Roy / The Righful Ruler (Disc 2)
+DYEAR=2001
+DGENRE=Reggae
+TTITLE0=Wet Vision
+TTITLE1=Medley Train
+TTITLE2=You Keep On Running
+TTITLE3=Flashing My Whip
+TTITLE4=On The Beach
+TTITLE5=On Top Of The Peak
+TTITLE6=Rule Of The Nation
+TTITLE7=Stick Together
+TTITLE8=The Higher The Mountain
+TTITLE9=King Tubby's Special
+TTITLE10=Tom Drunk
+TTITLE11=Tide Is High
+TTITLE12=Double Six
+TTITLE13=Don't Stay Away
+TTITLE14=Festival Wise
+TTITLE15=Ain't That Loving You
+TTITLE16=Hard Feeling
+TTITLE17=Rock Away
+EXTD= YEAR: 2001 ID3G:  16
+EXTT0=
+EXTT1=
+EXTT2=
+EXTT3=
+EXTT4=
+EXTT5=
+EXTT6=
+EXTT7=
+EXTT8=
+EXTT9=
+EXTT10=
+EXTT11=
+EXTT12=
+EXTT13=
+EXTT14=
+EXTT15=
+EXTT16=
+EXTT17=
+PLAYORDER=

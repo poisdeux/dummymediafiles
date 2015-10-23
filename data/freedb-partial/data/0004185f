@@ -1,0 +1,301 @@
+# xmcd
+#
+# Track frame offsets: 
+#        150
+#        2063
+#        3186
+#        3884
+#        4998
+#        6119
+#        6810
+#        7510
+#        8594
+#        10361
+#        11062
+#        11791
+#        12491
+#        13188
+#        13936
+#        14630
+#        15316
+#        16013
+#        16704
+#        17399
+#        18097
+#        19953
+#        21744
+#        22437
+#        22812
+#        23504
+#        25181
+#        25873
+#        26899
+#        27999
+#        29133
+#        29616
+#        30315
+#        31008
+#        31492
+#        32190
+#        32674
+#        33791
+#        34486
+#        34965
+#        35450
+#        36575
+#        37704
+#        38404
+#        39102
+#        40220
+#        41332
+#        42024
+#        44015
+#        44464
+#        45170
+#        46288
+#        46987
+#        47677
+#        48366
+#        49066
+#        49767
+#        50468
+#        51168
+#        51868
+#        52568
+#        53054
+#        53752
+#        54896
+#        55380
+#        56085
+#        56771
+#        57467
+#        58165
+#        59272
+#        59959
+#        61070
+#        62876
+#        63991
+#        64695
+#        65214
+#        65918
+#        66402
+#        67097
+#        67792
+#        68694
+#        69177
+#        69876
+#        71004
+#        71694
+#        72390
+#        72872
+#        73477
+#        74179
+#        74893
+#        75591
+#        76284
+#        76769
+#        77470
+#        78168
+#
+# Disc length: 1050 seconds
+#
+# Revision: 0
+# Processed by: cddbd v1.5.1PL2 Copyright (c) Steve Scherf et al.
+# Submitted via: ExactAudioCopy v0.95a5
+#
+DISCID=0004185f
+DTITLE=Cuttle Cart / CC Underground CD5
+DYEAR=
+DGENRE=Data
+TTITLE0=Road Runner J
+TTITLE1=Robin Hood J
+TTITLE2=Robot Fight (PAL) J
+TTITLE3=Robot Tank J
+TTITLE4=Roc 'n Rope J
+TTITLE5=Rocky & Bullwinkle (Proto) J
+TTITLE6=Room of Doom J
+TTITLE7=Saboteur (Proto) J
+TTITLE8=Save Mary! J
+TTITLE9=Save Our Ship J
+TTITLE10=Say (Talking Stella)
+TTITLE11=Super Challenge Baseball J
+TTITLE12=Super Challenge Football J
+TTITLE13=Scsicide P
+TTITLE14=Scuba Diver J
+TTITLE15=Sea Battle J
+TTITLE16=Sea Hawk J
+TTITLE17=Sea Monster (PAL) J
+TTITLE18=Seaquest J
+TTITLE19=Secret Agent (Proto) P
+TTITLE20=Secret Quest J
+TTITLE21=Sentinel (Lightgun)
+TTITLE22=Shark Attack J
+TTITLE23=Ship Demo
+TTITLE24=Shootin' Gallery J
+TTITLE25=Shootin' Arcade (Proto) (Lightgun)
+TTITLE26=Shuttle Orbiter J
+TTITLE27=Sinistar (Proto) J
+TTITLE28=Sir Lancelot J
+TTITLE29=Skateboardin' J
+TTITLE30=Skeet Shoot J
+TTITLE31=Ski Hunt (PAL) J
+TTITLE32=Ski Run (PAL) J
+TTITLE33=Skiing J
+TTITLE34=Sky Diver J
+TTITLE35=Sky Jinks J
+TTITLE36=Sky Patrol (Proto) J
+TTITLE37=Sky Skipper J
+TTITLE38=Slot Machine J
+TTITLE39=Slot Racers J
+TTITLE40=Smurf: RIGC J
+TTITLE41=Smurfs Save The Day J
+TTITLE42=Snail Against Squirrel J
+TTITLE43=Sneak 'n Peek J
+TTITLE44=Snoopy & the Red Baron J
+TTITLE45=Solar Fox J
+TTITLE46=Solar Storm P
+TTITLE47=Solaris J
+TTITLE48=SoundX J
+TTITLE49=Sorcerer J
+TTITLE50=Socerer's Apprentice J
+TTITLE51=Space Attack J
+TTITLE52=Space Canyon J
+TTITLE53=Space Cavern J
+TTITLE54=Space Invaders J
+TTITLE55=Space Invaders (Atari Shields) J
+TTITLE56=Space Invaders Hack J
+TTITLE57=Space Invaders (Jeff Mintner) J
+TTITLE58=Space Invaders (Arcade) J
+TTITLE59=Space Invaders (Arcade 2) J
+TTITLE60=Space Jockey J
+TTITLE61=Space Robot J
+TTITLE62=Space Shuffle J
+TTITLE63=Space War J
+TTITLE64=Spacechase J
+TTITLE65=Spacemaster X-7 J
+TTITLE66=Spider Fighter J
+TTITLE67=Spider-Man J
+TTITLE68=Spike's Peak J
+TTITLE69=Spitfire Attack J
+TTITLE70=Springer J
+TTITLE71=Sprintmaster J
+TTITLE72=Spy Hunter J
+TTITLE73=Squeeze Box J
+TTITLE74=Squoosh (Proto) J
+TTITLE75=SSSnake J
+TTITLE76=Stampede J
+TTITLE77=Star Fox J
+TTITLE78=Star Gunner J
+TTITLE79=Star Raiders J/K
+TTITLE80=Star Ship J
+TTITLE81=Star Strike J
+TTITLE82=Star Trek: SOS J
+TTITLE83=Star Voyager J
+TTITLE84=Starmaster J
+TTITLE85=Steeple Chase P
+TTITLE86=Steeple Chase J
+TTITLE87=Stellar Track J
+TTITLE88=Stella-Sketch (J-P-Mouse)
+TTITLE89=Strategy X J
+TTITLE90=Strawberry Shortcake J
+TTITLE91=Street Racer J
+TTITLE92=Stronghold J
+TTITLE93=Stuntman J
+TTITLE94=Sub Scan J
+EXTD=
+EXTT0=
+EXTT1=
+EXTT2=
+EXTT3=
+EXTT4=
+EXTT5=
+EXTT6=
+EXTT7=
+EXTT8=
+EXTT9=
+EXTT10=
+EXTT11=
+EXTT12=
+EXTT13=
+EXTT14=
+EXTT15=
+EXTT16=
+EXTT17=
+EXTT18=
+EXTT19=
+EXTT20=
+EXTT21=
+EXTT22=
+EXTT23=
+EXTT24=
+EXTT25=
+EXTT26=
+EXTT27=
+EXTT28=
+EXTT29=
+EXTT30=
+EXTT31=
+EXTT32=
+EXTT33=
+EXTT34=
+EXTT35=
+EXTT36=
+EXTT37=
+EXTT38=
+EXTT39=
+EXTT40=
+EXTT41=
+EXTT42=
+EXTT43=
+EXTT44=
+EXTT45=
+EXTT46=
+EXTT47=
+EXTT48=
+EXTT49=
+EXTT50=
+EXTT51=
+EXTT52=
+EXTT53=
+EXTT54=
+EXTT55=
+EXTT56=
+EXTT57=
+EXTT58=
+EXTT59=
+EXTT60=
+EXTT61=
+EXTT62=
+EXTT63=
+EXTT64=
+EXTT65=
+EXTT66=
+EXTT67=
+EXTT68=
+EXTT69=
+EXTT70=
+EXTT71=
+EXTT72=
+EXTT73=
+EXTT74=
+EXTT75=
+EXTT76=
+EXTT77=
+EXTT78=
+EXTT79=
+EXTT80=
+EXTT81=
+EXTT82=
+EXTT83=
+EXTT84=
+EXTT85=
+EXTT86=
+EXTT87=
+EXTT88=
+EXTT89=
+EXTT90=
+EXTT91=
+EXTT92=
+EXTT93=
+EXTT94=
+PLAYORDER=

@@ -1,0 +1,76 @@
+# xmcd CD database file
+#
+# Track frame offsets:
+#	150
+#	18913
+#	20496
+#	37123
+#	38711
+#	40156
+#	58141
+#	59496
+#	61121
+#	80661
+#	82506
+#	84296
+#	102356
+#	104449
+#	106024
+#	124996
+#	126514
+#	128106
+#	148699
+#	150761
+#
+# Disc length: 2448 seconds
+#
+# Revision: 0
+# Processed by: cddbd v1.5.2PL0 Copyright (c) Steve Scherf et al.
+# Submitted via: CDex 1.70beta2
+#
+DISCID=00098e14
+DTITLE=Marienvesper 1693 / Heinrich Ignaz Franz Biber (1644-1704)
+DYEAR=2009
+DGENRE=Classical
+TTITLE0=1 Sonata VII
+TTITLE1=2 Marienvesper - Antiphon - Dum esset rex
+TTITLE2=3 Marienvesper - Dixit Dominus
+TTITLE3=4 Marienvesper - Antiphon - Dum esset rex
+TTITLE4=5 Marienvesper - Antiphon - Laeva ejus
+TTITLE5=6 Marienvesper - Laudate pueri
+TTITLE6=7 Marienvesper - Antiphon - Laeva ejus
+TTITLE7=8 Marienvesper - Antiphon - Jam hiems
+TTITLE8=9 Marienvesper - Laetatus sum
+TTITLE9=10 Marienvesper - Antiphon - Jam hiems
+TTITLE10=11 Marienvesper - Antiphon - Nigra sum
+TTITLE11=12 Marienvesper - Nisi Dominus
+TTITLE12=13 Marienvesper - Antiphon - Nigra sum
+TTITLE13=14 Marienvesper - Antiphon - Speciosa facta est
+TTITLE14=15 Marienvesper - Lauda Jerusalem
+TTITLE15=16 Marienvesper - Antiphon - Speciosa facta est
+TTITLE16=17 Marienvesper - Ad Magnificat - Beatam me dicent
+TTITLE17=18 Marienvesper - Magnificat
+TTITLE18=18 Marienvesper - Ad magnificat - Beatam me dicent
+TTITLE19=20 Sonata IX
+EXTD= YEAR: 2009
+EXTT0=
+EXTT1=
+EXTT2=
+EXTT3=
+EXTT4=
+EXTT5=
+EXTT6=
+EXTT7=
+EXTT8=
+EXTT9=
+EXTT10=
+EXTT11=
+EXTT12=
+EXTT13=
+EXTT14=
+EXTT15=
+EXTT16=
+EXTT17=
+EXTT18=
+EXTT19=
+PLAYORDER=

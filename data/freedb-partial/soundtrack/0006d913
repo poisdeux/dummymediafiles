@@ -1,0 +1,73 @@
+# xmcd CD database file
+#
+# Track frame offsets:
+#	150
+#	3127
+#	10297
+#	16035
+#	23125
+#	32757
+#	41112
+#	48872
+#	55145
+#	59187
+#	65575
+#	72800
+#	74630
+#	83872
+#	98530
+#	104770
+#	111772
+#	121097
+#	129570
+#
+# Disc length: 1755 seconds
+#
+# Revision: 3
+# Processed by: cddbd v1.5.2PL0 Copyright (c) Steve Scherf et al.
+# Submitted via: CDex 1.51
+#
+DISCID=0006d913
+DTITLE=ジャレコ / プラスアルファ
+DYEAR=1989
+DGENRE=ゲーム音楽
+TTITLE0=凱旋序曲 (Title)～Coin～Ggame Start 1
+TTITLE1=風の踊り子 (Stage 1 ''Wind Country'')
+TTITLE2=Extra Game
+TTITLE3=INTO BLUE (Stage 2 ''Sea Colony'')
+TTITLE4=BIRD ISLAND (Stage 3 ''Flower Town'')
+TTITLE5=SUN COLORS (Stage 4 ''Snow Country'')
+TTITLE6=LAST HEART (Stage 5 ''Sand City'')
+TTITLE7=ALBORADA (Stage 6 ''Dark Sodom'')
+TTITLE8=NEO BAROQUE (Stage 7 ''Eden'')
+TTITLE9=Ggme Start 2～Boss Stage
+TTITLE10=Ending Theme
+TTITLE11=Continue～Game Over
+TTITLE12=未使用曲 1 (午後の浜辺)
+TTITLE13=未使用曲 2 (夕焼けSHOWER)
+TTITLE14=INTO BLUE (Arrange Version)
+TTITLE15=風の踊り子 (Arrange Version)
+TTITLE16=SUN COLORS (Arrange Version)
+TTITLE17=LAST HEART (Arrange Version)
+TTITLE18=VOICE COLLECTION
+EXTD= YEAR: 1989
+EXTT0=
+EXTT1=
+EXTT2=
+EXTT3=
+EXTT4=
+EXTT5=
+EXTT6=
+EXTT7=
+EXTT8=
+EXTT9=
+EXTT10=
+EXTT11=
+EXTT12=
+EXTT13=
+EXTT14=
+EXTT15=
+EXTT16=
+EXTT17=
+EXTT18=
+PLAYORDER=
