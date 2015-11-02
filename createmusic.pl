@@ -27,12 +27,13 @@ if (@ARGV == 0) {
     exit;
 }
 
-sub writeid3v2tag($$$$$) {
+sub writeid3v2tag($$$$$$) {
 	my $filename = shift;
 	my $artist = shift;
 	my $album = shift;
 	my $tracknumber = shift;
 	my $tracktitle = shift;
+	my $year = shift;
 
 	my $mp3 = MP3::Tag->new($filename);
   	my $id3v2 = $mp3->new_tag("ID3v2");
@@ -40,7 +41,10 @@ sub writeid3v2tag($$$$$) {
 	$id3v2->add_frame("TPE1", $artist);	
 	$id3v2->add_frame("TALB", $album);	
 	$id3v2->add_frame("TIT2", $tracktitle);	
-	$id3v2->add_frame("TRCK", $tracknumber);	
+	$id3v2->add_frame("TRCK", $tracknumber);
+	if( defined $year) {	
+		$id3v2->add_frame("TYER", $year);
+	}	
 	$id3v2->write_tag();
 }
 
@@ -48,10 +52,12 @@ sub parseFile($) {
 	my $filename=$_[0];
 	my $artist;
 	my $album;
+	my $year;
 	open FH, $filename or die "Error opening file $filename\n";
 	while(<FH>) {
-		if ( /^DTITLE=(.*)\s\/\s(.*)$/ ) {
-			print "TESTING: $1  --  $2\n";
+		if ( /^DYEAR=([0-9]+)/ ) {
+			$year=$1;
+		} elsif ( /^DTITLE=(.*)\s\/\s(.*)$/ ) {
 			$artist=$1;
 			$album=$2;
 			$album =~ s/\//-/;
@@ -61,9 +67,7 @@ sub parseFile($) {
 			if ( ! -e "${artist}/${album}" ) {
 				mkdir "${artist}/${album}" or die "Error: failed to create directory ${artist}/${album}";
 			}
-		}
-
-		if( my ($trackno, $tracktitle) = $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
+		} elsif( my ($trackno, $tracktitle) = $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
 			if( $trackno < 10 ) {
 				$trackno = "0$trackno";
 			}
@@ -87,7 +91,7 @@ sub parseFile($) {
 				} else {
 					$tmpartist = $artist;
 				}
-				writeid3v2tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle});
+				writeid3v2tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle}, ${year});
 			}
 		}
 	}
