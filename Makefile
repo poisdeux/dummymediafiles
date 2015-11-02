@@ -1,3 +1,7 @@
+music:
+	mkdir -p media/music
+	cd media/music && ../../createmusic.pl ../../data/freedb-partial/rock/
+
 tvshows:
 	mkdir -p media/tvshows
 	cd media/tvshows && gunzip -c ../../data/movies.list.gz | ../../createtvshows.pl 

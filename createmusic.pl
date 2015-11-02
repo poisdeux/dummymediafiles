@@ -19,10 +19,29 @@
 
 use strict;
 use warnings;
+use Cwd;
+use MP3::Tag;
 
 if (@ARGV == 0) {
     print "Usage: createmusic.pl <DIR>...\n";
     exit;
+}
+
+sub writeid3v2tag($$$$$) {
+	my $filename = shift;
+	my $artist = shift;
+	my $album = shift;
+	my $tracknumber = shift;
+	my $tracktitle = shift;
+
+	my $mp3 = MP3::Tag->new($filename);
+  	my $id3v2 = $mp3->new_tag("ID3v2");
+	$id3v2->add_frame("TOPE", $artist);	
+	$id3v2->add_frame("TPE1", $artist);	
+	$id3v2->add_frame("TALB", $album);	
+	$id3v2->add_frame("TIT2", $tracktitle);	
+	$id3v2->add_frame("TRCK", $tracknumber);	
+	$id3v2->write_tag();
 }
 
 sub parseFile($) {
@@ -32,6 +51,7 @@ sub parseFile($) {
 	open FH, $filename or die "Error opening file $filename\n";
 	while(<FH>) {
 		if ( /^DTITLE=(.*)\s\/\s(.*)$/ ) {
+			print "TESTING: $1  --  $2\n";
 			$artist=$1;
 			$album=$2;
 			$album =~ s/\//-/;
@@ -48,16 +68,26 @@ sub parseFile($) {
 				$trackno = "0$trackno";
 			}
 			my $file = $trackno;
+			my $trackartist;
+			my $trackname;
 			if ( $tracktitle =~ /\// ) {
-				my ($trackartist, $trackname) = $tracktitle =~ /(.*)\s*\/\s*(.*)/;
+				($trackartist, $trackname) = $tracktitle =~ /(.*)\s*\/\s*(.*)/;
 				$file = $file . "-$trackartist-$trackname";
 			} else {
-				$file = $file . "$tracktitle";
+				$file = $file . "-$tracktitle";
 			}
-			$file= $file . ".mp3";
-			if ( open(FW,">${artist}/${album}/${file}") ) {
+			$file= "${artist}/${album}/${file}.mp3";
+			if ( open(FW,">${file}") ) {
 				print FW "";
 				close FW;
+
+				my $tmpartist;
+				if( defined $trackartist ) {
+					$tmpartist = $trackartist;
+				} else {
+					$tmpartist = $artist;
+				}
+				writeid3v2tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle});
 			}
 		}
 	}
