@@ -27,47 +27,72 @@ if (@ARGV == 0) {
     exit;
 }
 
-sub writeid3v2tag($$$$$$) {
+sub writeID3Tag($$$$$$$) {
 	my $filename = shift;
 	my $artist = shift;
 	my $album = shift;
 	my $tracknumber = shift;
 	my $tracktitle = shift;
 	my $year = shift;
+	my $genre = shift;
 
 	my $mp3 = MP3::Tag->new($filename);
-  	my $id3v2 = $mp3->new_tag("ID3v2");
-	$id3v2->add_frame("TOPE", $artist);	
-	$id3v2->add_frame("TPE1", $artist);	
-	$id3v2->add_frame("TALB", $album);	
-	$id3v2->add_frame("TIT2", $tracktitle);	
-	$id3v2->add_frame("TRCK", $tracknumber);
-	if( defined $year) {	
-		$id3v2->add_frame("TYER", $year);
-	}	
-	$id3v2->write_tag();
+  	my $id3v1 = $mp3->new_tag("ID3v1");
+
+	$id3v1->artist($artist);
+	$id3v1->album($album);
+	$id3v1->title($tracktitle);
+	$id3v1->track($tracknumber);
+	$id3v1->genre($genre);
+	$id3v1->year($year);
+
+	$id3v1->write_tag();
+	$mp3->close();
 }
 
-sub parseFile($) {
+sub createMusicFile($$$) {
+	my $artist = shift;
+	my $album = shift;
+	my $filename = shift;
+	
+	if( ! -e "${artist}" ) {
+		mkdir "${artist}" or die "Error: failed to create directory ${artist}";
+	}
+	
+	if ( ! -e "${artist}/${album}" ) {
+		mkdir "${artist}/${album}" or die "Error: failed to create directory ${artist}/${album}";
+	}
+	
+	my $file= "${artist}/${album}/${filename}.mp3";
+
+	# Create an empty file	
+	if ( open(FW,">${file}") ) {
+		print FW "";
+		close FW;
+
+	} else {
+		return undef;
+	}
+	return $file;
+}
+
+sub parseFreedbFile($) {
 	my $filename=$_[0];
 	my $artist;
 	my $album;
 	my $year;
+	my $genre;
 	open FH, $filename or die "Error opening file $filename\n";
 	while(<FH>) {
 		if ( /^DYEAR=([0-9]+)/ ) {
 			$year=$1;
+		} elsif ( /^DGENRE=(.+)/ ) {
+			$genre=$1;
 		} elsif ( /^DTITLE=(.*)\s\/\s(.*)$/ ) {
 			$artist=$1;
 			$album=$2;
 			$album =~ s/\//-/;
-			if( ! -e "${artist}" ) {
-				mkdir "${artist}" or die "Error: failed to create directory ${artist}";
-			}
-			if ( ! -e "${artist}/${album}" ) {
-				mkdir "${artist}/${album}" or die "Error: failed to create directory ${artist}/${album}";
-			}
-		} elsif( my ($trackno, $tracktitle) = $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
+		} elsif ( my ($trackno, $tracktitle) = $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
 			if( $trackno < 10 ) {
 				$trackno = "0$trackno";
 			}
@@ -80,18 +105,18 @@ sub parseFile($) {
 			} else {
 				$file = $file . "-$tracktitle";
 			}
-			$file= "${artist}/${album}/${file}.mp3";
-			if ( open(FW,">${file}") ) {
-				print FW "";
-				close FW;
+			
+			$file = createMusicFile($artist, $album, $file);				
 
+			if( defined($file) ) {
 				my $tmpartist;
 				if( defined $trackartist ) {
 					$tmpartist = $trackartist;
 				} else {
 					$tmpartist = $artist;
 				}
-				writeid3v2tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle}, ${year});
+					
+				writeID3Tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle}, ${year}, ${genre});
 			}
 		}
 	}
@@ -104,8 +129,7 @@ foreach my $DIR (@ARGV) {
 	while(my $filename = readdir(DH)) {
 		my $file = "${DIR}/${filename}";
 		if( -f $file ) {
-			print "TEST $file\n";
-			parseFile($file);
+			parseFreedbFile($file);
 		}
 	}
 }
