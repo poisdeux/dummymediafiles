@@ -27,6 +27,36 @@ if (@ARGV == 0) {
     exit;
 }
 
+sub trim($) {
+	my $s = shift; 
+	$s =~ s/^\s+|\s+$//g; 
+	return $s;
+}
+
+sub writeID3v2Tag($$$$$$$) {
+	my $filename = shift;
+	my $artist = shift;
+	my $album = shift;
+	my $tracknumber = shift;
+	my $tracktitle = shift;
+	my $year = shift;
+	my $genre = shift;
+
+	my $mp3 = MP3::Tag->new($filename);
+	my $id3v2 = $mp3->new_tag("ID3v2");
+	$id3v2->add_frame("TPE1", $artist);     
+	$id3v2->add_frame("TPE2", $artist);     
+	$id3v2->add_frame("TALB", $album);      
+	$id3v2->add_frame("TIT2", $tracktitle); 
+	$id3v2->add_frame("TRCK", $tracknumber);
+	$id3v2->add_frame("TCON", $genre);
+	if( defined $year) {    
+		$id3v2->add_frame("TYER", $year);
+	}       
+	$id3v2->write_tag();
+	$mp3->close();
+}
+
 sub writeID3Tag($$$$$$$) {
 	my $filename = shift;
 	my $artist = shift;
@@ -85,14 +115,16 @@ sub parseFreedbFile($) {
 	open FH, $filename or die "Error opening file $filename\n";
 	while(<FH>) {
 		if ( /^DYEAR=([0-9]+)/ ) {
-			$year=$1;
+			$year = trim $1;
 		} elsif ( /^DGENRE=(.+)/ ) {
-			$genre=$1;
+			$genre = trim $1;
 		} elsif ( /^DTITLE=(.*)\s\/\s(.*)$/ ) {
-			$artist=$1;
-			$album=$2;
+			$artist = trim $1;
+			$album = trim $2;
 			$album =~ s/\//-/;
 		} elsif ( my ($trackno, $tracktitle) = $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
+			trim $trackno;
+			trim $tracktitle;
 			if( $trackno < 10 ) {
 				$trackno = "0$trackno";
 			}
@@ -100,7 +132,9 @@ sub parseFreedbFile($) {
 			my $trackartist;
 			my $trackname;
 			if ( $tracktitle =~ /\// ) {
-				($trackartist, $trackname) = $tracktitle =~ /(.*)\s*\/\s*(.*)/;
+				($trackartist, $trackname) = $tracktitle =~ /(.*)\/(.*)/;
+				trim $trackartist;
+				trim $trackname;
 				$file = $file . "-$trackartist-$trackname";
 			} else {
 				$file = $file . "-$tracktitle";
@@ -116,7 +150,7 @@ sub parseFreedbFile($) {
 					$tmpartist = $artist;
 				}
 					
-				writeID3Tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle}, ${year}, ${genre});
+				writeID3v2Tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle}, ${year}, ${genre});
 			}
 		}
 	}
