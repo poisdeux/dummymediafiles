@@ -67,6 +67,10 @@ while(<>) {
 
 close FH;
 
+if ( $amount > $linecnt ) {
+	$amount = $linecnt;
+}
+
 my %seen;
 for (1..$amount) {
     my $candidate = int rand($linecnt);
