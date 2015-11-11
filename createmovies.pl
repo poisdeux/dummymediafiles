@@ -86,3 +86,5 @@ while(<FH>) {
 	}
 }
 close FH;
+
+unlink $tmpfile || die "Failed to remove $tmpfile\n";
