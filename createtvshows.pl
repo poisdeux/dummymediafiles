@@ -38,6 +38,14 @@
 use strict;
 use warnings;
 
+my $amount = shift;
+if ( ! defined( $amount ) ) {
+	print "Usage: $0 <NUMBER>\n";
+	exit 1;
+}
+
+my %tvshows;
+
 while(<>) {
 	my ($title, $year, $eptitle, $season, $epnumber) = $_ =~ /
 	\"(.*)\"\s+
@@ -50,20 +58,50 @@ while(<>) {
 	if( ( defined $title ) && ( defined $season ) && ( defined $epnumber ) ) {
 		$title =~ s/\s+$//;
 		$title =~ s/\//_/g;
-		my $dir = "${title}";
 		if( defined $year ) {
-			$dir = $dir . " ($year)";
+			$title = $title . " ($year)";
 		}
-		my $seasondir = "${dir}/Season ${season}";
-		my $file = "$seasondir/S${season}E${epnumber}.mp4";
-		if ( ! -e ${dir} ) { 
-			mkdir "${dir}" or die "Line: $_ failed: $!: ${dir}";
+		if ( ! exists ( $tvshows{$title} ) ) {
+			$tvshows{$title} = {};
 		}
-		if ( ! -e ${seasondir} ) {
-			mkdir "${seasondir}" or die "Line: $_ failed: $!: ${seasondir}";
+		
+		if ( ! exists ( $tvshows{$title}{$season} ) ) {
+			$tvshows{$title}{$season} = {};
 		}
-		open(FW,">${file}");
-		print FW "";
-		close FW;
+		
+		$tvshows{$title}{$season}{$epnumber} = 1;
+
 	} 
+}
+
+my @titles = keys %tvshows;
+
+my %seen;
+if ( $amount < @titles ) {
+	for (1..$amount) {
+    		my $index = int rand(@titles);
+    		redo if $seen{$titles[$index]}++;
+	}
+} else {
+	%seen = %tvshows;	
+}
+
+foreach my $title (keys %seen) {
+	my %seasons = %{$tvshows{$title}};
+	foreach my $seasontitle (keys %seasons ) {
+		my %season = %{$seasons{$seasontitle}};	
+		foreach my $episode (keys %season) {
+			my $dir = "${title}/Season ${seasontitle}";
+			my $file = "${dir}/S${seasontitle}E${episode}.mp4";
+			if ( ! -e ${title} ) { 
+				mkdir "${title}" or die "Line: $_ failed: $!: ${title}";
+			}
+			if ( ! -e "${dir}" ) {
+				mkdir "${dir}" or die "Line: $_ failed: $!: ${dir}";
+			}
+			open(FW,">${file}");
+			print FW "";
+			close FW;
+		}
+	}
 }
