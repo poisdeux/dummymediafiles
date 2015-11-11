@@ -33,6 +33,19 @@
 use strict;
 use warnings;
 
+my $amount = shift;
+if ( ! defined( $amount ) ) {
+	print "Usage: $0 <NUMBER>\n";
+	exit 1;
+}
+
+
+my $tmpfile = ".movies";
+
+open(FH,">${tmpfile}");
+
+my $linecnt = 0;
+
 while(<>) {
 	my ($title, $year) = $_ =~ /
 	^(.*)\s+
@@ -46,10 +59,30 @@ while(<>) {
 		if( defined $year ) {
 			$file = $file . " ($year)";
 		}
-		$file = $file . ".mp4";
-		if ( open(FW,">${file}") ) {
-			print FW "";
-			close FW;
-		}
+		${file} = ${file} . ".mp4";
+		print FH $file, "\n";		
+		$linecnt++;
 	} 
 }
+
+close FH;
+
+my %seen;
+for (1..$amount) {
+    my $candidate = int rand($linecnt);
+    redo if $seen{$candidate}++;
+}
+
+open(FH,"${tmpfile}");
+$linecnt = 0;
+while(<FH>) {
+	$linecnt++;
+	next if ! defined( $seen{$linecnt} );
+ 
+	my $file = $_;
+	if ( open(FW,">${file}") ) {
+			print FW "";
+			close FW;
+	}
+}
+close FH;

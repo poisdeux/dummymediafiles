@@ -1,3 +1,5 @@
+all: music tvshows movies
+
 music:
 	mkdir -p media/music
 	cd media/music && ../../createmusic.pl ../../data/freedb-partial/*
@@ -8,7 +10,7 @@ tvshows:
 	
 movies:
 	mkdir -p media/movies
-	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl 
+	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl 500
 
 clean:
 	rm -rf media
