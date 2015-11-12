@@ -6,11 +6,11 @@ music:
 
 tvshows:
 	mkdir -p media/tvshows
-	cd media/tvshows && gunzip -c ../../data/movies.list.gz | ../../createtvshows.pl 
+	cd media/tvshows && gunzip -c ../../data/movies.list.gz | ../../createtvshows.pl 500
 	
 movies:
 	mkdir -p media/movies
-	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl 500
+	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl 1000
 
 clean:
 	rm -rf media
