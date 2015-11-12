@@ -122,9 +122,9 @@ sub parseFreedbFile($) {
 			$artist = trim $1;
 			$album = trim $2;
 			$album =~ s/\//-/;
-		} elsif ( my ($trackno, $tracktitle) = $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
-			trim $trackno;
-			trim $tracktitle;
+		} elsif ( $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
+			my $trackno = trim $1;
+			my $tracktitle = trim $2;
 			if( $trackno < 10 ) {
 				$trackno = "0$trackno";
 			}
@@ -132,9 +132,9 @@ sub parseFreedbFile($) {
 			my $trackartist;
 			my $trackname;
 			if ( $tracktitle =~ /\// ) {
-				($trackartist, $trackname) = $tracktitle =~ /(.*)\/(.*)/;
-				trim $trackartist;
-				trim $trackname;
+				$tracktitle =~ /(.*)\/(.*)/;
+				$trackartist = trim $1;
+				$trackname = trim $2;
 				$file = $file . "-$trackartist-$trackname";
 			} else {
 				$file = $file . "-$tracktitle";
