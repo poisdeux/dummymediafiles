@@ -12,5 +12,9 @@ movies:
 	mkdir -p media/movies
 	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl 1000
 
+musicvideos:
+	mkdir -p media/musicvideos
+	cd media/musicvideos && cat ../../data/musicvideos.list | ../../createmusicvideos.pl
+
 clean:
 	rm -rf media
