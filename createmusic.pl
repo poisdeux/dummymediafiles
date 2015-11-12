@@ -143,14 +143,12 @@ sub parseFreedbFile($) {
 			$file = createMusicFile($artist, $album, $file);				
 
 			if( defined($file) ) {
-				my $tmpartist;
 				if( defined $trackartist ) {
-					$tmpartist = $trackartist;
+					writeID3v2Tag(${file}, ${trackartist}, ${album}, ${trackno}, ${trackname}, ${year}, ${genre});
 				} else {
-					$tmpartist = $artist;
+					writeID3v2Tag(${file}, ${artist}, ${album}, ${trackno}, ${tracktitle}, ${year}, ${genre});
 				}
 					
-				writeID3v2Tag(${file}, ${tmpartist}, ${album}, ${trackno}, ${tracktitle}, ${year}, ${genre});
 			}
 		}
 	}
