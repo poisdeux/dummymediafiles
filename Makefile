@@ -2,7 +2,7 @@ all: music tvshows movies
 
 music:
 	mkdir -p media/music
-	cd media/music && ../../createmusic.pl ../../data/freedb-partial/*
+	cd media/music && ../../createmusic.pl ../../data/silence_5sec.mp3 ../../data/freedb-partial/*
 
 tvshows:
 	mkdir -p media/tvshows
@@ -18,3 +18,6 @@ musicvideos:
 
 clean:
 	rm -rf media
+
+clean-music:
+	rm -rf media/music

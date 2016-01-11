@@ -21,11 +21,14 @@ use strict;
 use warnings;
 use Cwd;
 use MP3::Tag;
-
-if (@ARGV == 0) {
-    print "Usage: createmusic.pl <DIR>...\n";
+use File::Copy qw(copy);
+ 
+if (@ARGV < 2) {
+    print "Usage: createmusic.pl <MP3FILE> <DIR>...\n";
     exit;
 }
+
+my $MP3FILE = shift @ARGV;
 
 sub trim($) {
 	my $s = shift; 
@@ -96,13 +99,8 @@ sub createMusicFile($$$) {
 	my $file= "${artist}/${album}/${filename}.mp3";
 
 	# Create an empty file	
-	if ( open(FW,">${file}") ) {
-		print FW "";
-		close FW;
+	copy("$MP3FILE", "${file}") or return undef;
 
-	} else {
-		return undef;
-	}
 	return $file;
 }
 
