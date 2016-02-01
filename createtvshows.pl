@@ -37,11 +37,40 @@
 
 use strict;
 use warnings;
+use File::Copy qw(copy);
+
+if (@ARGV < 2) {
+    print "Usage: createtvshows.pl <VIDEOFILE> <AMOUNT>\n";
+    exit;
+}
+
+my $DATAFILE = shift;
+if (! -e "${DATAFILE}") {
+	print "Error: ${DATAFILE} does not exist";
+	exit 1;
+}
 
 my $amount = shift;
-if ( ! defined( $amount ) ) {
-	print "Usage: $0 <NUMBER>\n";
-	exit 1;
+
+sub createFile($$$) {
+	my $maingroup = shift;
+	my $subgroup = shift;
+	my $filename = shift;
+	
+	if( ! -e "${maingroup}" ) {
+		mkdir "${maingroup}" or die "Error: failed to create directory ${maingroup}";
+	}
+	
+	if ( ! -e "${maingroup}/${subgroup}" ) {
+		mkdir "${maingroup}/${subgroup}" or die "Error: failed to create directory ${maingroup}/${subgroup}";
+	}
+	
+	my $file= "${maingroup}/${subgroup}/${filename}";
+
+	# Create an empty file	
+	copy("$DATAFILE", "${file}") or return undef;
+
+	return $file;
 }
 
 my %tvshows;
@@ -76,6 +105,7 @@ while(<>) {
 
 my @titles = keys %tvshows;
 
+#Randomly select $amount tvshows
 my %seen;
 if ( $amount < @titles ) {
 	for (1..$amount) {
@@ -91,17 +121,7 @@ foreach my $title (keys %seen) {
 	foreach my $seasontitle (keys %seasons ) {
 		my %season = %{$seasons{$seasontitle}};	
 		foreach my $episode (keys %season) {
-			my $dir = "${title}/Season ${seasontitle}";
-			my $file = "${dir}/S${seasontitle}E${episode}.mp4";
-			if ( ! -e ${title} ) { 
-				mkdir "${title}" or die "Line: $_ failed: $!: ${title}";
-			}
-			if ( ! -e "${dir}" ) {
-				mkdir "${dir}" or die "Line: $_ failed: $!: ${dir}";
-			}
-			open(FW,">${file}");
-			print FW "";
-			close FW;
+			createFile(${title}, "Season ${seasontitle}", "S${seasontitle}E${episode}.mp4");
 		}
 	}
 }

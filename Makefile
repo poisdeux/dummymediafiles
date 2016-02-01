@@ -1,4 +1,4 @@
-all: music tvshows movies
+all: music tvshows movies musicvideos
 
 music:
 	mkdir -p media/music
@@ -6,7 +6,7 @@ music:
 
 tvshows:
 	mkdir -p media/tvshows
-	cd media/tvshows && gunzip -c ../../data/movies.list.gz | ../../createtvshows.pl 500
+	cd media/tvshows && gunzip -c ../../data/movies.list.gz | ../../createtvshows.pl ../../data/blank.mp4 500
 	
 movies:
 	mkdir -p media/movies
@@ -21,3 +21,6 @@ clean:
 
 clean-music:
 	rm -rf media/music
+
+clean-tvshows:
+	rm -rf media/tvshows
