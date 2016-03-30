@@ -14,7 +14,7 @@ movies:
 
 musicvideos:
 	mkdir -p media/musicvideos
-	cd media/musicvideos && cat ../../data/musicvideos.list | ../../createmusicvideos.pl
+	cd media/musicvideos && cat ../../data/musicvideos.list | ../../createmusicvideos.pl ../../data/blank.mp4
 
 clean:
 	rm -rf media
@@ -24,3 +24,6 @@ clean-music:
 
 clean-tvshows:
 	rm -rf media/tvshows
+
+clean-musicvideos:
+	rm -rf media/musicvideos

@@ -20,11 +20,33 @@
 use strict;
 use warnings;
 
+use strict;
+use warnings;
+use File::Copy qw(copy);
+ 
+if (@ARGV < 1) {
+    print "Usage: createmusicvideos.pl <MP3FILE> < <INPUTFILE>\n";
+    exit;
+}
+
+my $DATAFILE= shift @ARGV;
+
+sub trim($) {
+	my $s = shift; 
+	$s =~ s/^\s+|\s+$//g; 
+	return $s;
+}
+ sub createFile($) {
+	my $filename = shift;
+	
+	# Create an empty file	
+	copy("$DATAFILE", "${filename}") or return undef;
+}
+
 while(<>) {
 	chomp;
 	my $file = $_ . ".mp4";
-	if ( open(FW,">${file}") ) {
-			print FW "";
-			close FW;
-	}
+	createFile($file);
 }
+
+
