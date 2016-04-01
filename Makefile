@@ -2,7 +2,7 @@ all: music tvshows movies musicvideos
 
 music:
 	mkdir -p media/music
-	cd media/music && ../../createmusic.pl ../../data/silence_5sec.mp3 ../../data/freedb-partial/*
+	cd media/music && ../../createmusic.pl ../../data/silence_5sec.mp3 ../../data/freedb/*
 
 tvshows:
 	mkdir -p media/tvshows
@@ -27,3 +27,9 @@ clean-tvshows:
 
 clean-musicvideos:
 	rm -rf media/musicvideos
+
+download-musicdata:
+	cd data/ && \
+	curl -o freedb-complete-20160401.tar.bz2 http://ftp.freedb.org/pub/freedb/freedb-complete-20160401.tar.bz2 && \
+	cd freedb && \
+	tar -xf ../freedb-complete-20160401.tar.bz2 
