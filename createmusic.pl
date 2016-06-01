@@ -143,14 +143,23 @@ foreach my $DIR (@ARGV) {
 }
 
 # Setup corner cases
+
+## Artist, no album, no title
 my $file = createMusicFile("The Artist", "unknown", "01-the_artist_no_album");
 writeID3v2Tag(${file}, "The Artist", undef, undef, "Unknown", undef, undef);
 
+## No artist with album, no title
 $file = createMusicFile("unknown", "The Album", "01-the_album_no_artist");
 writeID3v2Tag(${file}, undef, "The Album", undef, "Unknown", undef, undef);
 
+## No artist, no album, with title
 $file = createMusicFile("unknown", "unknown", "01-the_title_no_artist_no_album");
 writeID3v2Tag(${file}, undef, undef, undef, "The Title", undef, undef);
 
+## No artist, no album, no title
 $file = createMusicFile("unknown", "unknown", "01-no_title_no_artist_no_album");
 writeID3v2Tag(${file}, undef, undef, undef, undef, undef, undef);
+
+# Song with three artists
+$file = createMusicFile("ThreeArtists", "ThreeArtistsAlbum", "01-threeartists");
+writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", 01, "threeartists", undef, undef);
