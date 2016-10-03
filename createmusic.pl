@@ -36,10 +36,11 @@ sub trim($) {
 	return $s;
 }
 
-sub writeID3v2Tag($$$$$$$) {
+sub writeID3v2Tag($$$$$$$$) {
 	my $filename = shift;
 	my $artist = shift;
 	my $album = shift;
+	my $albumartist = shift;
 	my $tracknumber = shift;
 	my $tracktitle = shift;
 	my $year = shift;
@@ -49,7 +50,7 @@ sub writeID3v2Tag($$$$$$$) {
 
 	my $id3v2 = $mp3->new_tag("ID3v2");
 	$id3v2->add_frame("TPE1", $artist) if defined $artist;     
-	$id3v2->add_frame("TPE2", $artist) if defined $artist;     
+	$id3v2->add_frame("TPE2", $albumartist) if defined $albumartist;
 	$id3v2->add_frame("TALB", $album) if defined $album;      
 	$id3v2->add_frame("TIT2", $tracktitle) if defined $tracktitle; 
 	$id3v2->add_frame("TRCK", $tracknumber) if defined $tracknumber;
@@ -119,12 +120,7 @@ sub parseFreedbFile($) {
 			$file = createMusicFile($artist, $album, $file);				
 
 			if( defined($file) ) {
-				if( defined $trackartist ) {
-					writeID3v2Tag(${file}, ${trackartist}, ${album}, ${trackno}, ${trackname}, ${year}, ${genre});
-				} else {
-					writeID3v2Tag(${file}, ${artist}, ${album}, ${trackno}, ${tracktitle}, ${year}, ${genre});
-				}
-					
+				writeID3v2Tag(${file}, ${trackartist}, ${album}, ${artist}, ${trackno}, ${trackname}, ${year}, ${genre});
 			}
 		}
 	}
@@ -146,20 +142,20 @@ foreach my $DIR (@ARGV) {
 
 ## Artist, no album, no title
 my $file = createMusicFile("The Artist", "unknown", "01-the_artist_no_album");
-writeID3v2Tag(${file}, "The Artist", undef, undef, "Unknown", undef, undef);
+writeID3v2Tag(${file}, "The Artist", undef, undef, undef, "Unknown", undef, undef);
 
 ## No artist with album, no title
 $file = createMusicFile("unknown", "The Album", "01-the_album_no_artist");
-writeID3v2Tag(${file}, undef, "The Album", undef, "Unknown", undef, undef);
+writeID3v2Tag(${file}, undef, "The Album", undef, undef, "Unknown", undef, undef);
 
 ## No artist, no album, with title
 $file = createMusicFile("unknown", "unknown", "01-the_title_no_artist_no_album");
-writeID3v2Tag(${file}, undef, undef, undef, "The Title", undef, undef);
+writeID3v2Tag(${file}, undef, undef, undef, undef, "The Title", undef, undef);
 
 ## No artist, no album, no title
 $file = createMusicFile("unknown", "unknown", "01-no_title_no_artist_no_album");
-writeID3v2Tag(${file}, undef, undef, undef, undef, undef, undef);
+writeID3v2Tag(${file}, undef, undef, undef, undef, undef, undef, undef);
 
 # Song with three artists
 $file = createMusicFile("ThreeArtists", "ThreeArtistsAlbum", "01-threeartists");
-writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", 01, "threeartists", undef, undef);
+writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", "First artist\0Second artist\0Third artist", 01, "threeartists", undef, undef);
