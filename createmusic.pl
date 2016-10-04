@@ -159,3 +159,12 @@ writeID3v2Tag(${file}, undef, undef, undef, undef, undef, undef, undef);
 # Song with three artists
 $file = createMusicFile("ThreeArtists", "ThreeArtistsAlbum", "01-threeartists");
 writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", "First artist\0Second artist\0Third artist", 01, "threeartists", undef, undef);
+
+# Various artists album
+$file = createMusicFile("Various Artists", "Various Artists Album", "01-firstartist");
+writeID3v2Tag(${file}, "First artist", "Various Artists Album", "Various Artists", 01, "firstsong", undef, undef);
+$file = createMusicFile("Various Artists", "Various Artists Album", "02-secondartist");
+writeID3v2Tag(${file}, "Second artist", "Various Artists Album", "Various Artists", 02, "secondsong", undef, undef);
+$file = createMusicFile("Various Artists", "Various Artists Album", "03-thirdartist");
+writeID3v2Tag(${file}, "Third artist", "Various Artists Album", "Various Artists", 03, "thirdsong", undef, undef);
+
