@@ -106,8 +106,8 @@ sub parseFreedbFile($) {
 				$trackno = "0$trackno";
 			}
 			my $file = $trackno;
-			my $trackartist;
-			my $trackname;
+			my $trackartist = $artist;
+			my $trackname = $tracktitle;
 			if ( $tracktitle =~ /\// ) {
 				$tracktitle =~ /(.*)\/(.*)/;
 				$trackartist = trim $1;
