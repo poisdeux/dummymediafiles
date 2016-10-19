@@ -161,10 +161,26 @@ $file = createMusicFile("ThreeArtists", "ThreeArtistsAlbum", "01-threeartists");
 writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", "First artist\0Second artist\0Third artist", 01, "threeartists", undef, undef);
 
 # Various artists album
-$file = createMusicFile("Various Artists", "Various Artists Album", "01-firstartist");
-writeID3v2Tag(${file}, "First artist", "Various Artists Album", "Various Artists", 01, "firstsong", undef, undef);
-$file = createMusicFile("Various Artists", "Various Artists Album", "02-secondartist");
-writeID3v2Tag(${file}, "Second artist", "Various Artists Album", "Various Artists", 02, "secondsong", undef, undef);
-$file = createMusicFile("Various Artists", "Various Artists Album", "03-thirdartist");
-writeID3v2Tag(${file}, "Third artist", "Various Artists Album", "Various Artists", 03, "thirdsong", undef, undef);
+$file = createMusicFile("Various Artists", "Various Artists Album", "01-first_artist");
+writeID3v2Tag(${file}, "First artist", "Various Artists Album", "Various Artists", 01, "first song", undef, undef);
+$file = createMusicFile("Various Artists", "Various Artists Album", "02-second_artist");
+writeID3v2Tag(${file}, "Second artist", "Various Artists Album", "Various Artists", 02, "second song", undef, undef);
+$file = createMusicFile("Various Artists", "Various Artists Album", "03-third_artist");
+writeID3v2Tag(${file}, "Third artist", "Various Artists Album", "Various Artists", 03, "third song", undef, undef);
+
+# Various artists album, no album artist
+$file = createMusicFile("unknown", "Various Artists Album No Album Artist", "01-first_artist_no_album_artist");
+writeID3v2Tag(${file}, "First artist", "Various Artists Album No Album Artist", undef, 01, "first song no album artist", undef, undef);
+$file = createMusicFile("unknown", "Various Artists Album No Album Artist", "02-second_artist_no_album_artist");
+writeID3v2Tag(${file}, "Second artist", "Various Artists Album No Album Artist", undef, 02, "second song no album artist", undef, undef);
+$file = createMusicFile("unknown", "Various Artists Album No Album Artist", "03-third_artist_no_album_artist");
+writeID3v2Tag(${file}, "Third artist", "Various Artists Album No Album Artist", undef, 03, "third song no album artist", undef, undef);
+
+# Various artists album, no song artist, with album artist 
+$file = createMusicFile("unknown", "Various Artists Album with Album Artist but no Artist", "01-first_album_artist_no_song_artist");
+writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 01, "first song album artist no song artist", undef, undef);
+$file = createMusicFile("unknown", "Various Artists Album with Album Artist but no Artist", "02-second_album_artist_no_song_artist");
+writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 02, "second song album artist no song artist", undef, undef);
+$file = createMusicFile("unknown", "Various Artists Album with Album Artist but no Artist", "03-third_album_artist_no_song_artist");
+writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 03, "third song album artist no song artist", undef, undef);
 
