@@ -36,7 +36,7 @@ sub trim($) {
 	return $s;
 }
 
-sub writeID3v2Tag($$$$$$$$) {
+sub writeID3v2Tag($$$$$$$$$) {
 	my $filename = shift;
 	my $artist = shift;
 	my $album = shift;
@@ -45,6 +45,7 @@ sub writeID3v2Tag($$$$$$$$) {
 	my $tracktitle = shift;
 	my $year = shift;
 	my $genre = shift;
+	my $disc = shift;
 
 	my $mp3 = MP3::Tag->new($filename);
 
@@ -56,6 +57,7 @@ sub writeID3v2Tag($$$$$$$$) {
 	$id3v2->add_frame("TRCK", $tracknumber) if defined $tracknumber;
 	$id3v2->add_frame("TCON", $genre) if defined $genre;
 	$id3v2->add_frame("TYER", $year) if defined $year;
+	$id3v2->add_frame("TPOS", $disc) if defined $disc;
 	$id3v2->write_tag();
 	$mp3->close();
 }
@@ -120,7 +122,7 @@ sub parseFreedbFile($) {
 			$file = createMusicFile($artist, $album, $file);				
 
 			if( defined($file) ) {
-				writeID3v2Tag(${file}, ${trackartist}, ${album}, ${artist}, ${trackno}, ${trackname}, ${year}, ${genre});
+				writeID3v2Tag(${file}, ${trackartist}, ${album}, ${artist}, ${trackno}, ${trackname}, ${year}, ${genre}, undef);
 			}
 		}
 	}
@@ -142,45 +144,71 @@ foreach my $DIR (@ARGV) {
 
 ## Artist, no album, no title
 my $file = createMusicFile("The Artist", "unknown", "01-the_artist_no_album");
-writeID3v2Tag(${file}, "The Artist", undef, undef, undef, "Unknown", undef, undef);
+writeID3v2Tag(${file}, "The Artist", undef, undef, undef, "Unknown", undef, undef, undef);
 
 ## No artist with album, no title
 $file = createMusicFile("unknown", "The Album", "01-the_album_no_artist");
-writeID3v2Tag(${file}, undef, "The Album", undef, undef, "Unknown", undef, undef);
+writeID3v2Tag(${file}, undef, "The Album", undef, undef, "Unknown", undef, undef, undef);
 
 ## No artist, no album, with title
 $file = createMusicFile("unknown", "unknown", "01-the_title_no_artist_no_album");
-writeID3v2Tag(${file}, undef, undef, undef, undef, "The Title", undef, undef);
+writeID3v2Tag(${file}, undef, undef, undef, undef, "The Title", undef, undef, undef);
 
 ## No artist, no album, no title
 $file = createMusicFile("unknown", "unknown", "01-no_title_no_artist_no_album");
-writeID3v2Tag(${file}, undef, undef, undef, undef, undef, undef, undef);
+writeID3v2Tag(${file}, undef, undef, undef, undef, undef, undef, undef, undef);
 
 # Song with three artists
 $file = createMusicFile("ThreeArtists", "ThreeArtistsAlbum", "01-threeartists");
-writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", "First artist\0Second artist\0Third artist", 01, "threeartists", undef, undef);
+writeID3v2Tag(${file}, "First artist\0Second artist\0Third artist", "ThreeArtistsAlbum", "First artist\0Second artist\0Third artist", 01, "threeartists", undef, undef, undef);
 
 # Various artists album
 $file = createMusicFile("Various Artists", "Various Artists Album", "01-first_artist");
-writeID3v2Tag(${file}, "First artist", "Various Artists Album", "Various Artists", 01, "first song", undef, undef);
+writeID3v2Tag(${file}, "First artist", "Various Artists Album", "Various Artists", 01, "first song", undef, undef, undef);
 $file = createMusicFile("Various Artists", "Various Artists Album", "02-second_artist");
-writeID3v2Tag(${file}, "Second artist", "Various Artists Album", "Various Artists", 02, "second song", undef, undef);
+writeID3v2Tag(${file}, "Second artist", "Various Artists Album", "Various Artists", 02, "second song", undef, undef, undef);
 $file = createMusicFile("Various Artists", "Various Artists Album", "03-third_artist");
-writeID3v2Tag(${file}, "Third artist", "Various Artists Album", "Various Artists", 03, "third song", undef, undef);
+writeID3v2Tag(${file}, "Third artist", "Various Artists Album", "Various Artists", 03, "third song", undef, undef, undef);
 
 # Various artists album, no album artist
 $file = createMusicFile("unknown", "Various Artists Album No Album Artist", "01-first_artist_no_album_artist");
-writeID3v2Tag(${file}, "First artist", "Various Artists Album No Album Artist", undef, 01, "first song no album artist", undef, undef);
+writeID3v2Tag(${file}, "First artist", "Various Artists Album No Album Artist", undef, 01, "first song no album artist", undef, undef, undef);
 $file = createMusicFile("unknown", "Various Artists Album No Album Artist", "02-second_artist_no_album_artist");
-writeID3v2Tag(${file}, "Second artist", "Various Artists Album No Album Artist", undef, 02, "second song no album artist", undef, undef);
+writeID3v2Tag(${file}, "Second artist", "Various Artists Album No Album Artist", undef, 02, "second song no album artist", undef, undef, undef);
 $file = createMusicFile("unknown", "Various Artists Album No Album Artist", "03-third_artist_no_album_artist");
-writeID3v2Tag(${file}, "Third artist", "Various Artists Album No Album Artist", undef, 03, "third song no album artist", undef, undef);
+writeID3v2Tag(${file}, "Third artist", "Various Artists Album No Album Artist", undef, 03, "third song no album artist", undef, undef, undef);
 
 # Various artists album, no song artist, with album artist 
 $file = createMusicFile("unknown", "Various Artists Album with Album Artist but no Artist", "01-first_album_artist_no_song_artist");
-writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 01, "first song album artist no song artist", undef, undef);
+writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 01, "first song album artist no song artist", undef, undef, undef);
 $file = createMusicFile("unknown", "Various Artists Album with Album Artist but no Artist", "02-second_album_artist_no_song_artist");
-writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 02, "second song album artist no song artist", undef, undef);
+writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 02, "second song album artist no song artist", undef, undef, undef);
 $file = createMusicFile("unknown", "Various Artists Album with Album Artist but no Artist", "03-third_album_artist_no_song_artist");
-writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 03, "third song album artist no song artist", undef, undef);
+writeID3v2Tag(${file}, undef, "Various Artists Album No Song Artist", "Various Artists", 03, "third song album artist no song artist", undef, undef, undef);
+
+# Multi-disc album
+$file = createMusicFile("Multi disc artist", "Multi disc album", "01-first_disc_first_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 01, "First disc first song", undef, undef, "1/3");
+$file = createMusicFile("Multi disc artist", "Multi disc album", "02-first_disc_second_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 02, "First disc second song", undef, undef, "1/3");
+$file = createMusicFile("Multi disc artist", "Multi disc album", "01-second_disc_first_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 01, "Second disc first song", undef, undef, "2/3");
+$file = createMusicFile("Multi disc artist", "Multi disc album", "02-second_disc_second_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 02, "Second disc second song", undef, undef, "2/3");
+$file = createMusicFile("Multi disc artist", "Multi disc album", "01-third_disc_first_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 01, "Third disc first song", undef, undef, "3/3");
+$file = createMusicFile("Multi disc artist", "Multi disc album", "02-third_disc_second_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 02, "Third disc second song", undef, undef, "3/3");
+$file = createMusicFile("Multi disc artist", "Multi disc album", "03-third_disc_third_track");
+writeID3v2Tag(${file}, "Multi disc artist", "Multi disc album", "Multi disc artist", 03, "Third disc third song", undef, undef, "3/3");
+
+my $filename = shift;
+my $artist = shift;
+my $album = shift;
+my $albumartist = shift;
+my $tracknumber = shift;
+my $tracktitle = shift;
+my $year = shift;
+my $genre = shift;
+my $disc = shift;
 
