@@ -102,7 +102,7 @@ sub parseFreedbFile($) {
 			$album = trim $2;
 			$album =~ s/\//-/;
 		} elsif ( $_ =~ /^TTITLE(\d+)=(.*)$/ ) {
-			my $trackno = trim $1;
+			my $trackno = ( trim $1 ) + 1;
 			my $tracktitle = trim $2;
 			if( $trackno < 10 ) {
 				$trackno = "0$trackno";
