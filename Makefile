@@ -10,7 +10,7 @@ tvshows:
 	
 movies:
 	mkdir -p media/movies
-	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl 1000
+	cd media/movies && gunzip -c ../../data/movies.list.gz | ../../createmovies.pl ../../data/blank.mp4 1000
 
 musicvideos:
 	mkdir -p media/musicvideos

@@ -25,7 +25,7 @@ use warnings;
 use File::Copy qw(copy);
  
 if (@ARGV < 1) {
-    print "Usage: createmusicvideos.pl <MP3FILE> < <INPUTFILE>\n";
+    print "Usage: createmusicvideos.pl <MP4FILE> < <INPUTFILE>\n";
     exit;
 }
 

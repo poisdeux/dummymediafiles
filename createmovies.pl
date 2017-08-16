@@ -32,15 +32,18 @@
 
 use strict;
 use warnings;
+use File::Copy qw(copy);
 
-my $amount = shift;
-if ( ! defined( $amount ) ) {
-	print "Usage: $0 <NUMBER>\n";
+my $DATAFILE = shift;
+my $AMOUNT = shift;
+if ( ! defined( $AMOUNT ) ) {
+	print "Usage: $0 <MP4FILE> <AMOUNT> < <INPUTFILE>\n";
 	exit 1;
 }
 
 
 my $tmpfile = ".movies";
+
 
 open(FH,">${tmpfile}");
 
@@ -67,12 +70,13 @@ while(<>) {
 
 close FH;
 
-if ( $amount > $linecnt ) {
-	$amount = $linecnt;
+if ( $AMOUNT > $linecnt ) {
+	$AMOUNT = $linecnt;
 }
 
+# Randomly select up to $AMOUNT items from the INPUT
 my %seen;
-for (1..$amount) {
+for (1..$AMOUNT) {
     my $candidate = int rand($linecnt);
     redo if $seen{$candidate}++;
 }
@@ -83,12 +87,10 @@ while(<FH>) {
 	$linecnt++;
 	next if ! defined( $seen{$linecnt} );
  
+	chomp;
 	my $file = $_;
-	if ( open(FW,">${file}") ) {
-			print FW "";
-			close FW;
-	}
+	copy("$DATAFILE", "$file");
 }
 close FH;
 
-unlink $tmpfile || die "Failed to remove $tmpfile\n";
+#unlink $tmpfile || die "Failed to remove $tmpfile\n";
