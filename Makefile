@@ -25,6 +25,9 @@ clean-music:
 clean-tvshows:
 	rm -rf media/tvshows
 
+clean-movies:
+	rm -rf media/movies
+
 clean-musicvideos:
 	rm -rf media/musicvideos
 
